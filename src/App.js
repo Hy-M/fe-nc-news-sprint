@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
 import './App.css';
+import { Router, Link } from '@reach/router';
+import Title from './components/Title';
+import Navigation from './components/Navigation';
+import ArticleList from './components/ArticleList';
+import SingleArticle from './components/SingleArticle';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    username: null
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <Title />
+          <nav>
+            <Navigation />
+          </nav>
+         <Router>
+            <ArticleList path="/articles" />
+            <SingleArticle path="/articles/:article_id"/>
+         </Router>
+      </div>
+    )
+  }
 }
 
 export default App;
