@@ -13,3 +13,20 @@ main {
 li {
   padding: 10px 0;
 }
+
+nav a {
+  color: rgb(148, 57, 209);
+}
+
+nav a:hover {
+  text-decoration: none;
+}
+
+main a {
+  text-decoration: none;
+  color: rgb(209, 47, 74);
+}
+
+main a:hover {
+  color: pink;
+}
