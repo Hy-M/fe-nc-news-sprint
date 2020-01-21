@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { fetchSingleArticle } from '../utils/api';
-// import { Router, Link } from '@reach/router';
+import Comments from './Comments';
+import { Router, Link } from '@reach/router';
 
 class SingleArticle extends Component {
     state = {
@@ -17,29 +18,22 @@ class SingleArticle extends Component {
             this.setState({singleArticle: article});
         })
     }
-
-    // componentDidUpdate(prevProps, prevState) {
-    //     console.log(this.props);
-    //     if (prevProps.singleArticle.topic !== this.props.topic) {
-    //         this.getArticle();
-    //     }
-    // }
     
     render() {
         const { title, body, topic, votes, comment_count, created_at, author } = this.state.singleArticle;
-        
+        const { article_id } = this.props;
         return (
             <main>
                 <h3>{title}</h3>
                 <h6>Written by: {author} on {created_at}</h6>
-                <p>Topic: {topic}
-                    {/* <Link to={topic}>
-                        
-                    </Link> */}
-                </p>
+                <p>Topic: {topic}</p>
                 <p>{body}</p>
                 <p>Votes: {votes}</p>
-                <p>Comments: {comment_count}</p>
+                <p>Comment count: {comment_count}</p>
+                <Link to={`/article/${article_id}/comments`}>View comments</Link>
+                <Router>
+                    <Comments path={`/comments`}/>
+                </Router>
             </main>
         );
     }

@@ -9,7 +9,7 @@ import Comments from './components/Comments';
 
 class App extends Component {
   state = {
-    username: null
+    user: 'jessjelly'
   }
 
   render() {
@@ -21,9 +21,9 @@ class App extends Component {
           </nav>
          <Router>
             <ArticleList path="/articles" />
-            <SingleArticle path="/articles/:article_id"/>
-            {/* <SingleArticle path="/articles/:topic"/> */}
-            <Comments path="/articles/:article_id/comments"/>
+            <ArticleList path="/articles/:topic" />
+            <SingleArticle path="/article/:article_id"/>
+            <Comments path="/article/:article_id/comments"/>
          </Router>
       </div>
     )

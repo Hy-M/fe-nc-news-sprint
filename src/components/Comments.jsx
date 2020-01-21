@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as api from '../utils/api';
 
+
 class Comments extends Component {
     state = {
         comments: []
@@ -15,9 +16,9 @@ class Comments extends Component {
     
     render() {
         const { comments } = this.state;
-        
         return (
             <main>
+                <h4>Comments:</h4>
             <ol>
             {
                 comments.map((comment) => {                                                

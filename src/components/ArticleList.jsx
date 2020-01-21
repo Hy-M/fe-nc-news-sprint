@@ -8,10 +8,27 @@ class ArticleList extends Component {
     }
 
     componentDidMount() {
+       this.getAllArticles();
+    }
+
+    getAllArticles = () => {
         api.fetchAllArticles()
         .then(articles => {
             this.setState({articles: articles})
         })
+    }
+
+    getTopicRelatedArticles = () => {
+        api.fetchTopicRelatedArticles(this.props.topic)
+        .then(topicRelatedArticles => {
+            this.setState({ articles: topicRelatedArticles })
+        })
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.topic !== this.props.topic) {
+            this.getTopicRelatedArticles()
+        }
     }
     
 
@@ -19,16 +36,19 @@ class ArticleList extends Component {
         const { articles } = this.state;
         return (
             <main>
+                {this.props.topic ? <h3>Articles related to {this.props.topic}</h3> : <h3>Showing all articles</h3>}
                 <ol>
                 {
                     articles.map((article) => {                                                
                         return (
                             <li key={article.article_id}>
-                                <Link to={(article.article_id).toString()}>
+                                <Link to={`/article/${article.article_id.toString()}`}>
                                     {article.title}
                                 </Link>
-                                <p> Topic: 
-                                        {article.topic}
+                                <p>Topic:  
+                                    <Link to={`/articles/${article.topic}`}>
+                                     {article.topic}
+                                </Link>
                                 </p>
                             </li>
                         )

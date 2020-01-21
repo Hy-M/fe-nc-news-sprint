@@ -24,3 +24,15 @@ exports.fetchComments = () => {
     })
 };
 
+exports.fetchTopicRelatedArticles = (topic) => {
+    return axios
+    .get('https://nc-news-hym.herokuapp.com/api/articles', {
+        params: {
+            topic
+        }
+    })
+    .then(({ data: { articles } }) => {
+        return articles;
+    })
+}
+
