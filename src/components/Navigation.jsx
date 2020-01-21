@@ -7,7 +7,7 @@ class Navigation extends Component {
             <>
             <Link to="/articles">Articles</Link>
             </>
-        );
+        );  
     }
 }
 

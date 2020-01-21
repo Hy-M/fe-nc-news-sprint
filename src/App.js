@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import './App.css';
-import { Router, Link } from '@reach/router';
+import { Router } from '@reach/router';
 import Title from './components/Title';
 import Navigation from './components/Navigation';
 import ArticleList from './components/ArticleList';
 import SingleArticle from './components/SingleArticle';
+import Comments from './components/Comments';
 
 class App extends Component {
   state = {
@@ -21,6 +22,8 @@ class App extends Component {
          <Router>
             <ArticleList path="/articles" />
             <SingleArticle path="/articles/:article_id"/>
+            {/* <SingleArticle path="/articles/:topic"/> */}
+            <Comments path="/articles/:article_id/comments"/>
          </Router>
       </div>
     )

@@ -15,3 +15,12 @@ exports.fetchSingleArticle = (article_id) => {
         return article;
     })
 }
+
+exports.fetchComments = () => {
+    return axios
+    .get('https://nc-news-hym.herokuapp.com/api/articles/28/comments')
+    .then(({ data: { comments } }) => {
+        return comments;
+    })
+};
+

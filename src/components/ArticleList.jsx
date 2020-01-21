@@ -21,12 +21,15 @@ class ArticleList extends Component {
             <main>
                 <ol>
                 {
-                    articles.map((article) => {                        
+                    articles.map((article) => {                                                
                         return (
                             <li key={article.article_id}>
                                 <Link to={(article.article_id).toString()}>
                                     {article.title}
                                 </Link>
+                                <p> Topic: 
+                                        {article.topic}
+                                </p>
                             </li>
                         )
                     })

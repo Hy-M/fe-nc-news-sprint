@@ -5,6 +5,7 @@
 main {
   display: grid;
   grid-template-columns: 1fr;
+  grid-template-rows: repeat(6, auto);
   width: 90%;
   margin: 0 auto;
 }
