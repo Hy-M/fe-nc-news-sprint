@@ -48,5 +48,13 @@ exports.fetchSortedArticles = (sortColumn) => {
     })
 }
 
+exports.postComment = (article_id, comment) => {    
+    return axios
+    .post(`https://nc-news-hym.herokuapp.com/api/articles/${Number(article_id)}/comments`, comment)   
+    .then(({ data: { comment }}) => {
+        return comment;
+    })
+}
+
 
 
