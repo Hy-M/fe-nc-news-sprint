@@ -7,10 +7,6 @@ class ArticleList extends Component {
         articles: []
     }
 
-    componentDidMount() {
-       this.getAllArticles();
-    }
-
     getAllArticles = () => {
         api.fetchAllArticles()
         .then(articles => {
@@ -25,17 +21,42 @@ class ArticleList extends Component {
         })
     }
 
+    getSortedArticles = (sortColumn) => {
+        api.fetchSortedArticles(sortColumn)
+        .then(sortedArticles => {
+            this.setState({ articles: sortedArticles })
+        })
+    }
+
+    componentDidMount() {
+        this.getAllArticles();
+    }
+
     componentDidUpdate(prevProps) {
         if (prevProps.topic !== this.props.topic) {
             this.getTopicRelatedArticles()
         }
     }
-    
+
+    handleChange = (changeEvent) => {
+        let selectedValue = changeEvent.target.value;
+
+        if (selectedValue === 'sortByCommentCount') {
+            this.getSortedArticles('comment_count')
+        } else if (selectedValue === 'sortByVotes') {
+            this.getSortedArticles('votes');
+        }
+    }
 
     render() {
         const { articles } = this.state;
         return (
             <main>
+                <select onChange={this.handleChange}>
+                    <option defaultValue="sortByDate">Sort by date created (default)</option>
+                    <option value="sortByCommentCount">Sort by comments count</option>
+                    <option value="sortByVotes">Sort by votes</option>
+                </select>
                 {this.props.topic ? <h3>Articles related to {this.props.topic}</h3> : <h3>Showing all articles</h3>}
                 <ol>
                 {

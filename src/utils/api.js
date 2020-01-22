@@ -36,3 +36,17 @@ exports.fetchTopicRelatedArticles = (topic) => {
     })
 }
 
+exports.fetchSortedArticles = (sortColumn) => {
+    return axios
+    .get('https://nc-news-hym.herokuapp.com/api/articles', {
+        params: {
+            sort_by: sortColumn
+        }
+    })
+    .then(({ data: { articles }}) => {
+        return articles;
+    })
+}
+
+
+
