@@ -2,6 +2,17 @@
   text-align: center;
 }
 
+header h1 a {
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+}
+
+header h1 a:hover {
+  color: #d12f4a;
+  transition: color 0.3s ease;
+}
+
 main {
   display: grid;
   grid-template-columns: 1fr;
@@ -24,7 +35,7 @@ nav a:hover {
 
 main a {
   text-decoration: none;
-  color: rgb(248, 58, 58);
+  color: #f83a3a;
 }
 
 main a:hover {
