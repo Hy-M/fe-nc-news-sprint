@@ -9,25 +9,29 @@ class Comments extends Component {
         user: this.props.user
     }
 
+    // Render all comments functionality
     componentDidMount() {
         this.getComments()
     }
 
     getComments = () => {
-        api.fetchComments()
+        api.fetchComments(this.props.article_id)
         .then(comments => {
             this.setState({comments: comments})
         })
     }
 
+    // Post comment functionality
     handleChange = (commentBody, id) => {
         this.setState({ [id]: commentBody });
     }
 
-    getNewComment = (article_id, comment) => {
+    postNewComment = (article_id, comment) => {
         api.postComment(article_id, comment)
         .then((newComment) => {
-            this.displayNewComment(newComment)
+            this.setState((currentState) => {
+                return { comments: [newComment, ...currentState.comments]}
+            })
         })
     }
 
@@ -42,23 +46,22 @@ class Comments extends Component {
         }
 
         submitEvent.target.firstChild.value = "";
-        this.getNewComment(article_id, commentObj)
+        this.postNewComment(article_id, commentObj)
     }
 
-    displayNewComment = (newComment) => {
-        this.setState((currentState) => {
-            return { comments: [newComment, ...currentState.comments]}
-        })
-    }
-    
+    // Delete comment functionality
     handleClick = (clickEvent) => {
-        clickEvent.preventDefault();
-        let selectedCommentToDelete = clickEvent.target.parentElement.id;
-
-        this.removeComment(selectedCommentToDelete)
+        let commentElementToDelete = clickEvent.target.parentElement.id;   
+        let user = clickEvent.target.parentElement.firstChild.id
+        
+        if (user === this.state.user) {
+            this.deleteComment(commentElementToDelete)
+        } else {
+            console.log("You can't delete someone elses comments");
+        } 
     }
 
-    removeComment = (comment_id) => {
+    deleteComment = (comment_id) => {
         api.deleteComment(comment_id)
         .then(() => {
             this.getComments();
@@ -75,7 +78,7 @@ class Comments extends Component {
                 comments.map((comment) => {                                                
                     return (
                         <li key={comment.comment_id} id={comment.comment_id}>
-                            <p>{comment.author} said:</p>
+                            <p id={comment.author}>{comment.author} said:</p>
                             <p>{comment.body}</p>
                             <p>at {comment.created_at}</p>
                             <button onClick={this.handleClick}>Delete my comment</button>

@@ -16,9 +16,9 @@ exports.fetchSingleArticle = (article_id) => {
     })
 }
 
-exports.fetchComments = () => {
+exports.fetchComments = (article_id) => {
     return axios
-    .get('https://nc-news-hym.herokuapp.com/api/articles/28/comments')
+    .get(`https://nc-news-hym.herokuapp.com/api/articles/${article_id}/comments`)
     .then(({ data: { comments } }) => {
         return comments;
     })
@@ -52,6 +52,8 @@ exports.postComment = (article_id, comment) => {
     return axios
     .post(`https://nc-news-hym.herokuapp.com/api/articles/${Number(article_id)}/comments`, comment)   
     .then(({ data: { comment }}) => {
+        console.log(comment);
+        
         return comment;
     })
 }
