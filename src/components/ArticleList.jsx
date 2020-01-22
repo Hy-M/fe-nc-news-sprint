@@ -45,6 +45,8 @@ class ArticleList extends Component {
             this.getSortedArticles('comment_count')
         } else if (selectedValue === 'sortByVotes') {
             this.getSortedArticles('votes');
+        } else {
+            this.getAllArticles();
         }
     }
 
@@ -53,9 +55,9 @@ class ArticleList extends Component {
         return (
             <main>
                 <select onChange={this.handleChange}>
-                    <option defaultValue="sortByDate">Sort by date created (default)</option>
-                    <option value="sortByCommentCount">Sort by comments count</option>
-                    <option value="sortByVotes">Sort by votes</option>
+                    <option defaultValue="sortByDate">Sort by date created (most recent)</option>
+                    <option value="sortByCommentCount">Sort by comments (most to least)</option>
+                    <option value="sortByVotes">Sort by votes (most to least)</option>
                 </select>
                 {this.props.topic ? <h3>Articles related to {this.props.topic}</h3> : <h3>Showing all articles</h3>}
                 <ol>

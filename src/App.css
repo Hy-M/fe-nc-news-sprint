@@ -15,7 +15,7 @@ li {
 }
 
 nav a {
-  color: rgb(148, 57, 209);
+  color: #6e39d1;
 }
 
 nav a:hover {
@@ -24,9 +24,20 @@ nav a:hover {
 
 main a {
   text-decoration: none;
-  color: rgb(209, 47, 74);
+  color: rgb(248, 58, 58);
 }
 
 main a:hover {
-  color: pink;
+  color: #d12f4a;
+}
+
+select {
+  margin: 1rem auto;
+  padding: 5px 0;
+  cursor: pointer;
+  background-color: #f6f6f6;
+  outline: none;
+  border: 1px solid #d87070;
+  border-radius: 8px;
+  width: 85%;
 }
