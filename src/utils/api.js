@@ -56,5 +56,9 @@ exports.postComment = (article_id, comment) => {
     })
 }
 
+exports.deleteComment = (comment_id) => {
+    return axios
+    .delete(`https://nc-news-hym.herokuapp.com/api/comments/${comment_id}`);
+}
 
 

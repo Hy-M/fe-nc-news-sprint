@@ -51,6 +51,20 @@ class Comments extends Component {
         })
     }
     
+    handleClick = (clickEvent) => {
+        clickEvent.preventDefault();
+        let selectedCommentToDelete = clickEvent.target.parentElement.id;
+
+        this.removeComment(selectedCommentToDelete)
+    }
+
+    removeComment = (comment_id) => {
+        api.deleteComment(comment_id)
+        .then(() => {
+            this.getComments();
+        })
+    }
+
     render() {
         const { comments } = this.state;
         return (
@@ -60,10 +74,11 @@ class Comments extends Component {
             {
                 comments.map((comment) => {                                                
                     return (
-                        <li key={comment.comment_id}>
+                        <li key={comment.comment_id} id={comment.comment_id}>
                             <p>{comment.author} said:</p>
                             <p>{comment.body}</p>
                             <p>at {comment.created_at}</p>
+                            <button onClick={this.handleClick}>Delete my comment</button>
                         </li>
                     )
                 })

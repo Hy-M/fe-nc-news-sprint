@@ -63,11 +63,19 @@ input {
 
 button {
   margin: 0 0 1rem 0.2rem;
-  background-color: #6e39d1;
   border-radius: 6px;
   outline: none;
   padding: 5px;
-  color: #f6f6f6;
   cursor: pointer;
   font-size: 0.8rem;
+}
+
+form button {
+  background-color: #6e39d1;
+  color: #f6f6f6;
+}
+
+li button {
+  background-color: #f6f6f6;
+  color: #f83a3a;
 }
