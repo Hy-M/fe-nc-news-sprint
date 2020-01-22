@@ -41,6 +41,7 @@ class Comments extends Component {
             body: commentBody
         }
 
+        submitEvent.target.firstChild.value = "";
         this.getNewComment(article_id, commentObj)
     }
 
@@ -69,7 +70,6 @@ class Comments extends Component {
             }
             </ol>
             <h4>Post a comment:</h4>
-            <p>{this.props.user} said:</p>
             <form onSubmit={this.handleSubmit}>
                 <input type='text' id='commentBody' onChange={(changeEvent) => this.handleChange(changeEvent.target.value, 'commentBody')} required></input>
                 <button>Post!</button>
