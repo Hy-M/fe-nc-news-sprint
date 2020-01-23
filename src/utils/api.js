@@ -52,8 +52,6 @@ exports.postComment = (article_id, comment) => {
     return axios
     .post(`https://nc-news-hym.herokuapp.com/api/articles/${Number(article_id)}/comments`, comment)   
     .then(({ data: { comment }}) => {
-        console.log(comment);
-        
         return comment;
     })
 }
@@ -68,6 +66,14 @@ exports.patchVotes = (article_id, vote) => {
     .patch(`https://nc-news-hym.herokuapp.com/api/articles/${article_id}`, vote)
     .then(({ data: { article }}) => {
         return article;
+    })
+}
+
+exports.patchCommentVotes = (comment_id, vote) => {
+    return axios
+    .patch(`https://nc-news-hym.herokuapp.com/api/comments/${comment_id}`, vote)
+    .then(({ data: { comment }}) => {
+        return comment
     })
 }
 

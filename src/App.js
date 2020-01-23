@@ -22,7 +22,7 @@ class App extends Component {
          <Router>
             <ArticleList path="/articles" />
             <ArticleList path="/articles/:topic" />
-            <SingleArticle path="/article/:article_id"/>
+            <SingleArticle path="/article/:article_id" user={this.state.user}/>
             <Comments path="/article/:article_id/comments" user={this.state.user}/>
          </Router>
       </div>

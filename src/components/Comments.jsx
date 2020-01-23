@@ -6,7 +6,8 @@ class Comments extends Component {
     state = {
         comments: [],
         commentBody: '',
-        user: this.props.user
+        user: this.props.user,
+        vote: 0
     }
 
     // Render all comments functionality
@@ -68,6 +69,38 @@ class Comments extends Component {
         })
     }
 
+    // Update votes functionality
+    updateVotes = (comment_id, vote) => {
+        api.patchCommentVotes(comment_id, vote)
+        .then((updatedComment) => {
+            this.setState({vote: updatedComment.votes})
+        })
+    }
+
+    handleVoteClick = (clickEvent) => {
+        let commentId = clickEvent.target.parentElement.id;
+        let buttonId = clickEvent.target.id;
+        let vote = {
+            inc_votes: 0
+        }
+
+        if (buttonId === "upvote") {
+            vote.inc_votes = 1;
+
+            this.updateVotes(commentId, vote);
+            this.setState((currentState) => {
+                return {vote: currentState.vote + vote.inc_votes}
+            })
+        } else {
+            vote.inc_votes = -1;
+            
+            this.updateVotes(commentId, vote);
+            this.setState((currentState) => {
+                return {vote: currentState.vote + vote.inc_votes}
+            })
+        }
+    }
+
     render() {
         const { comments } = this.state;
         return (
@@ -81,7 +114,10 @@ class Comments extends Component {
                             <p id={comment.author}>{comment.author} said:</p>
                             <p>{comment.body}</p>
                             <p>at {comment.created_at}</p>
-                            <button onClick={this.handleClick}>Delete my comment</button>
+                            <p>Votes: {this.state.vote}</p>
+                            <button id="upvote" onClick={this.handleVoteClick}>Upvote</button>
+                            <button id="downvote" onClick={this.handleVoteClick}>Downvote</button>
+                            <button onClick={this.handleClick}>Delete comment</button>
                         </li>
                     )
                 })

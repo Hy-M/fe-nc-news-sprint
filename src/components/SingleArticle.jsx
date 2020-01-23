@@ -25,9 +25,7 @@ class SingleArticle extends Component {
     updateVotes = (article_id, vote) => {
         api.patchVotes(article_id, vote)
         .then((updatedArticle) => {
-            this.setState((currentState) => {
-                return {vote: updatedArticle.votes}
-            })
+            this.setState({vote: updatedArticle.votes})
         })
     }
 
