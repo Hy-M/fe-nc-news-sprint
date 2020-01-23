@@ -63,4 +63,11 @@ exports.deleteComment = (comment_id) => {
     .delete(`https://nc-news-hym.herokuapp.com/api/comments/${comment_id}`);
 }
 
+exports.patchVotes = (article_id, vote) => {
+    return axios
+    .patch(`https://nc-news-hym.herokuapp.com/api/articles/${article_id}`, vote)
+    .then(({ data: { article }}) => {
+        return article;
+    })
+}
 
